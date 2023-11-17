@@ -5,3 +5,7 @@
 .secret-content-section {
     display: none;
 }
+
+.hidden {
+    display: none;
+}

@@ -14,14 +14,16 @@ function onDoLogin() {
 
     if (!elUserName.value || !elPassword.value) return
 
-    const logIn = doLogin(elUserName.value, elPassword.value)
+    const user = doLogin(elUserName.value, elPassword.value)
 
     elUserName.value = ''
     elPassword.value = ''
 
-    if (!logIn) {
+    if (!user) {
         alert('No user name or password found')
         return
+    } else if (user.isAdmin) {
+        renderAdminBtn()
     }
 
     renderSecretContent()
@@ -44,4 +46,13 @@ function onDoLogOut() {
 
     const elUserNameDisplay = document.querySelector('.user-name-display')
     elUserNameDisplay.style.display = 'none'
+}
+
+function onAdmin() {
+    window.location.href = 'admin.html'
+}
+
+function renderAdminBtn() {
+    const elAdminBtn = document.querySelector('.admin')
+    elAdminBtn.classList.remove('hidden')
 }
