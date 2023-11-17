@@ -18,6 +18,32 @@ function getUsersToShow() {
 	}
 }
 
+function doLogin(userName, password) {
+    const user = gUsers.find(user => {
+        if (user.username === userName && user.password === password)
+        return user
+    })
+    console.log('user:', user)
+
+    if (!user) return null
+    
+    var timestamp = new Date().getTime()
+    user.lastLoginTime = timestampToTime(timestamp)
+    
+    gCurrUser = userName
+    
+    _saveUsers()
+    
+    return user
+}
+
+function clearLocalStorage() {
+    clearStorage()
+}
+
+function getUserName() {
+    return gCurrUser
+}
 
 function _createUsers() {
     gUsers - loadFromStorage('usersDB')
