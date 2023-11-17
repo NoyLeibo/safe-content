@@ -22,3 +22,6 @@ function _createUser(username, password, isAdmin) {
     }
 }
 
+function _saveUsers() {
+    saveToStorage('usersDB', gUsers)
+}
