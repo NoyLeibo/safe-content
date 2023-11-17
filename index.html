@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/safe-content.css">
+    <title>Safe Content</title>
+</head>
+
+<body>
+    <h1>Safe Content</h1>
+
+    <h3 class="user-name-display"></h3>
+
+    <section class="secret-content-section">
+        <img src="img/top-secret.webp" alt="top-secret-img">
+        <button class="log-out" onclick="onDoLogOut()">Log Out</button>
+    </section>
+
+    <section class="login-section">
+        <h2>Sign In!</h2>
+
+        <h3>Username:</h3>
+        <input class="user-name" type="text" placeholder="Enter Username">
+
+        <h3>Password:</h3>
+        <input class="password" type="password" placeholder="Enter Password">
+
+        <button class="log-In" onclick="onDoLogin ()">Login</button>
+    </section>
+
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/safe-content.service.js"></script>
+    <script src="js/safe-content.controller.js"></script>
+</body>
+
+</html>
