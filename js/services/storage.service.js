@@ -10,6 +10,6 @@ function loadFromStorage(key) {
     return JSON.parse(strVal)
 }
 
-function clearStorage() {
+function clearLocalStorage() {
     localStorage.clear()
 }

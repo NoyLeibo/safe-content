@@ -40,7 +40,7 @@ function renderSecretContent() {
 
 function onDoLogOut() {
     onInit()
-    clearLocalStorage()
+    clearStorage()
 
     const elUserNameDisplay = document.querySelector('.user-name-display')
     elUserNameDisplay.style.display = 'none'

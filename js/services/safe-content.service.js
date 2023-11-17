@@ -37,8 +37,8 @@ function doLogin(userName, password) {
     return user
 }
 
-function clearLocalStorage() {
-    clearStorage()
+function clearStorage() {
+    clearLocalStorage()
 }
 
 function getUserName() {
