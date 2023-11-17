@@ -38,3 +38,10 @@ function renderSecretContent() {
     elSecretContentSection.style.display = 'block'
 }
 
+function onDoLogOut() {
+    onInit()
+    clearLocalStorage()
+
+    const elUserNameDisplay = document.querySelector('.user-name-display')
+    elUserNameDisplay.style.display = 'none'
+}
