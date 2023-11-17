@@ -27,3 +27,14 @@ function onDoLogin() {
     renderSecretContent()
 }
 
+function renderSecretContent() {
+    const elLoginSection = document.querySelector('.login-section')
+    elLoginSection.style.display = 'none'
+
+    const elUserNameDisplay = document.querySelector('.user-name-display')
+    const elSecretContentSection = document.querySelector('.secret-content-section')
+
+    elUserNameDisplay.innerHTML = `Username: ${getUserName()}`
+    elSecretContentSection.style.display = 'block'
+}
+
