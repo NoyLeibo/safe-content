@@ -31,7 +31,7 @@ function doLogin(userName, password) {
 
     gCurrUser = userName
 
-    _saveUsersToStorage(gUsers)
+    _saveUsersToStorage(user)
 
     return user
 }
@@ -49,7 +49,6 @@ function clearStorage() {
         }
     }
 
-    
     saveCurrUserToStorage('')
     // clearLocalStorage()
 }
@@ -121,6 +120,11 @@ function _createUser(username, password, isAdmin) {
         isAdmin,
     }
 }
+
+function _saveUsersToStorage(user) {
+    saveToStorage('usersDB', user)
+
+}   
 
 function _saveUsersToStorage(users) {
     saveToStorage('usersDB', users)
