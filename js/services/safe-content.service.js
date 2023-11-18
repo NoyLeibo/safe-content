@@ -37,7 +37,18 @@ function doLogin(userName, password) {
 }
 
 function clearStorage() {
-    clearLocalStorage()
+    const loggedInUsers = _getLoggedInUsers()
+
+    if (loggedInUsers) {
+        const userIndex = loggedInUsers.findIndex(user => user.username === getUserName());
+
+        if (userIndex !== -1) {
+            loggedInUsers.splice(userIndex, 1);
+
+            saveUsersToStorage(loggedInUsers)
+        }
+    }
+    // clearLocalStorage()
 }
 
 function getUserName() {
@@ -73,7 +84,11 @@ function renderUsersTable() {
     return strHtml
 }
 
-function getLoggedInUsers() {
+function saveUsersToStorage(loggedInUsers) {
+    saveToStorage('usersDB', loggedInUsers)
+}
+
+function _getLoggedInUsers() {
     return loadFromStorage('usersDB')
 }
 
