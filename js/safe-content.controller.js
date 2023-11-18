@@ -10,6 +10,18 @@ function onInit() {
     elLoginSection.style.display = 'block'
 }
 
+function onInitAdmin() {
+    const loggedInUsers = getLoggedInUsers()
+    const currentUser = loggedInUsers.find(user => user.username === getUserName())
+
+    if (!loggedInUsers || !currentUser || !currentUser.isAdmin) {
+        window.location.href = 'index.html'
+        return
+    }
+
+    onRenderUsersTable()
+}
+
 function onDoLogin() {
     const elUserName = document.querySelector('.user-name')
     const elPassword = document.querySelector('.password')
@@ -38,7 +50,7 @@ function renderSecretContent() {
     const elUserNameDisplay = document.querySelector('.user-name-display')
     const elSecretContentSection = document.querySelector('.secret-content-section')
 
-    elUserNameDisplay.innerHTML = `Username: ${getUserName()}`
+    elUserNameDisplay.innerHTML = `${getUserName()}`
     elSecretContentSection.style.display = 'block'
 }
 
@@ -61,6 +73,10 @@ function renderAdminBtn() {
 
 function onRenderUsersTable() {
     const elTable = document.querySelector('.users-table')
-
     elTable.innerHTML = renderUsersTable()
+}
+
+function onSetSortBy(elSelect) {
+    setSortBy(elSelect.value)
+    onRenderUsersTable()
 }
