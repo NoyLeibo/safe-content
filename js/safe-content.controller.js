@@ -1,6 +1,8 @@
 'use strict'
 
 function onInit() {
+    // window.location.href = 'index.html'
+
     const elSecretContentSection = document.querySelector('.secret-content-section')
     const elLoginSection = document.querySelector('.login-section')
 
@@ -55,4 +57,10 @@ function onAdmin() {
 function renderAdminBtn() {
     const elAdminBtn = document.querySelector('.admin')
     elAdminBtn.classList.remove('hidden')
+}
+
+function onRenderUsersTable() {
+    const elTable = document.querySelector('.users-table')
+
+    elTable.innerHTML = renderUsersTable()
 }
