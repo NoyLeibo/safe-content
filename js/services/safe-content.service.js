@@ -3,6 +3,7 @@
 var gUsers
 var gCurrUser
 var gSortBy = 'username'
+var gIsTable = true
 
 _createUsers()
 
@@ -21,7 +22,6 @@ function doLogin(userName, password) {
         if (user.username === userName && user.password === password)
             return user
     })
-    console.log('user:', user)
 
     if (!user) return null
 
@@ -31,13 +31,13 @@ function doLogin(userName, password) {
 
     gCurrUser = userName
 
-    _saveUsers()
+    _saveUsersToStorage(gUsers)
 
     return user
 }
 
 function clearStorage() {
-    const loggedInUsers = _getLoggedInUsers()
+    const loggedInUsers = getLoggedInUsers()
 
     if (loggedInUsers) {
         const userIndex = loggedInUsers.findIndex(user => user.username === getUserName());
@@ -45,18 +45,13 @@ function clearStorage() {
         if (userIndex !== -1) {
             loggedInUsers.splice(userIndex, 1);
 
-            saveUsersToStorage(loggedInUsers)
+            _saveUsersToStorage(loggedInUsers)
         }
     }
+
+    
+    saveCurrUserToStorage('')
     // clearLocalStorage()
-}
-
-function getUserName() {
-    return gCurrUser
-}
-
-function setSortBy(sortBy) {
-    gSortBy = sortBy
 }
 
 function renderUsersTable() {
@@ -84,30 +79,39 @@ function renderUsersTable() {
     return strHtml
 }
 
-function saveUsersToStorage(loggedInUsers) {
-    saveToStorage('usersDB', loggedInUsers)
+function getUserName() {
+    return gCurrUser
 }
 
-function _getLoggedInUsers() {
+function setSortBy(sortBy) {
+    gSortBy = sortBy
+}
+
+function getLoggedInUsers() {
     return loadFromStorage('usersDB')
 }
 
-function _createUsers() {
-    gUsers = loadFromStorage('usersDB')
-    if (gUsers && gUsers.length) return
+function saveCurrUserToStorage(userName) {
+    saveToStorage('currLoggedInUserName', userName)
+}
 
+function getCurrLoggedInUser() {
+    return loadFromStorage('currLoggedInUserName')
+}
+
+function _createUsers() {
     gUsers = [
         _createUser('Alice', 'A', true),
         _createUser('Zack', 'Z', false),
         _createUser('Paul', 'P', false),
     ]
-
-    _saveUsers()
+    
+    _saveUsersToStorage(gUsers)
 }
 
 function _createUser(username, password, isAdmin) {
     var timestamp = new Date().getTime()
-
+    
     return {
         id: makeId(),
         username,
@@ -118,6 +122,6 @@ function _createUser(username, password, isAdmin) {
     }
 }
 
-function _saveUsers() {
-    saveToStorage('usersDB', gUsers)
+function _saveUsersToStorage(users) {
+    saveToStorage('usersDB', users)
 }

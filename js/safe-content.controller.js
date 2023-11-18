@@ -1,8 +1,6 @@
 'use strict'
 
 function onInit() {
-    // window.location.href = 'index.html'
-
     const elSecretContentSection = document.querySelector('.secret-content-section')
     const elLoginSection = document.querySelector('.login-section')
 
@@ -12,7 +10,7 @@ function onInit() {
 
 function onInitAdmin() {
     const loggedInUsers = getLoggedInUsers()
-    const currentUser = loggedInUsers.find(user => user.username === getUserName())
+    const currentUser = loggedInUsers.find(user => user.username === getCurrLoggedInUser())
 
     if (!loggedInUsers || !currentUser || !currentUser.isAdmin) {
         window.location.href = 'index.html'
@@ -37,7 +35,7 @@ function onDoLogin() {
         alert('No user name or password found')
         return
     } else if (user.isAdmin) {
-        renderAdminBtn()
+        renderAdminBtn('remove')
     }
 
     renderSecretContent()
@@ -52,9 +50,14 @@ function renderSecretContent() {
 
     elUserNameDisplay.innerHTML = `${getUserName()}`
     elSecretContentSection.style.display = 'block'
+
+    saveCurrUserToStorage(getUserName())
 }
 
 function onDoLogOut() {
+    if (window.location.href.includes('admin.html')) window.location.href = 'index.html'
+
+    renderAdminBtn('add')
     clearStorage()
     onInit()
 
@@ -66,9 +69,13 @@ function onAdmin() {
     window.location.href = 'admin.html'
 }
 
-function renderAdminBtn() {
+function renderAdminBtn(action) {
     const elAdminBtn = document.querySelector('.admin')
-    elAdminBtn.classList.remove('hidden')
+    if (action === 'remove') {
+        elAdminBtn.classList.remove('hidden')
+    } else {
+        elAdminBtn.classList.add('hidden')
+    }
 }
 
 function onRenderUsersTable() {
