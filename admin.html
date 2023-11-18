@@ -8,20 +8,25 @@
     <title>Admin</title>
 </head>
 
-<body onload="onRenderUsersTable()">
+<body onload="onInitAdmin()">
     <h1>Admin Content</h1>
 
-    <section class="users-table-section">
-        <table>
-            <tbody class="users-table">
-                <tr class="table-header">
-                    <td>userName</td>
-                    <td>password</td>
-                    <td>lastLoginTime</td>
-                    <td>isAdmin</td>
-                </tr>
-            </tbody>
-        </table>
+    <label>Sort by:</label>
+    <select onchange="onSetSortBy(this)">
+        <option value="username">Name</option>
+        <option value="lastLoginTime">Last Login</option>
+    </select>
+
+    <table>
+        <tbody class="users-table">
+            <tr class="table-header">
+                <td>userName</td>
+                <td>password</td>
+                <td>lastLoginTime</td>
+                <td>isAdmin</td>
+            </tr>
+        </tbody>
+    </table>
     </section>
 
 
