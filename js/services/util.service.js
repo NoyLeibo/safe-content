@@ -46,6 +46,6 @@ function sortByText(list, prop) {
 
 function sortByNumber(list, prop) {
     return list.sort((itemA, itemB) => {
-        return itemA[prop] - itemB[prop]
+        return -(itemA[prop] - itemB[prop])
     })
 }
